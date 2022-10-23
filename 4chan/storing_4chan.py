@@ -9,7 +9,7 @@ def clean_text(text):
 
 
 def main():
-    r = requests.get('https://a.4cdn.org/g/catalog.json')
+    r = requests.get('https://a.4cdn.org/pol/catalog.json')
     r = r.json()
     all_posts = dict()
     for page in r:
@@ -38,8 +38,22 @@ def main():
 
     print(len(all_posts))
 
-    with open('data_chan_games.json', 'w') as f:
-        json.dump(all_posts, f, indent=4)
+    filename = '4chan/data_chan.json'
+    # check if file exists, if yes add to it, if no create it
+    try:
+        with open(filename, 'r') as f:
+            data = json.load(f)
+            data.update(all_posts)
+
+    except FileNotFoundError:
+        data = all_posts
+
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+    
+
+    # with open('data_chan.json', 'w') as f:
+    #     json.dump(all_posts, f, indent=4)
 
 
 if __name__ == '__main__':
