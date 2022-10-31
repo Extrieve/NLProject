@@ -38,7 +38,7 @@ def main():
 
     print(len(all_posts))
 
-    filename = '4chan/data_chan.json'
+    filename = '4chan/Data/data_chan.json'
     # check if file exists, if yes add to it, if no create it
     try:
         with open(filename, 'r') as f:
